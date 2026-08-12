@@ -42,21 +42,14 @@ jobs:
         env:
           SEMGREP_SEND_METRICS: 'off'
 
-      # Ejecuta el dist real de AuditGuard (el mismo código del paso "scan" de
-      # action.yml). Con GITHUB_STEP_SUMMARY apuntando a report.md, la acción
-      # escribe el reporte Markdown como archivo dentro del repo.
-      - name: Run AuditGuard (motores reales) y emitir report.md
+      # Ejecuta los motores reales de AuditGuard (dist/…-engine.js) sobre el
+      # sample y materializa el reporte como report.md. El GITHUB_STEP_SUMMARY
+      # no puede redirigirse a un archivo (el runner lo inyecta por paso).
+      - name: Run AuditGuard engines (dist real) y emitir report.md
         id: scan
-        run: node AuditGuard/dist/index.js
+        run: node scripts/run-on-actions.mjs
         env:
           AUDITGUARD_SCAN_PATH: './sample'
-          AUDITGUARD_FAIL_ON_LEVEL: 'never'
-          AUDITGUARD_SEMGREP_RULESETS: 'p/default,p/security-audit,p/owasp-top-ten'
-          AUDITGUARD_ESLINT_CONFIG: ''
-          AUDITGUARD_AUTO_PR: 'false'
-          AUDITGUARD_DRY_RUN: 'true'
-          AUDITGUARD_REPORT_LANG: 'en'
-          GITHUB_STEP_SUMMARY: '${{ github.workspace }}/report.md'
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Commit report back
