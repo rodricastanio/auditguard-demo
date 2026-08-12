@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuditGuard — Demo del reporte real</title>
+  <meta name="description" content="Reporte de seguridad generado por AuditGuard (GitHub Action) sobre código intencionalmente vulnerable." />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="https://github.com/rodricastanio/AuditGuard" target="_blank" rel="noopener">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        </span>
+        <span class="brand-name">AuditGuard</span>
+      </a>
+      <div class="topbar-tags">
+        <span class="tag tag-action">
+          <span class="tag-dot" aria-hidden="true"></span>
+          GitHub Action
+        </span>
+        <a class="tag tag-link" href="https://github.com/rodricastanio/AuditGuard/releases" target="_blank" rel="noopener">v0.1.0-alpha.1</a>
+        <a class="tag tag-link" href="https://github.com/rodricastanio/AuditGuard" target="_blank" rel="noopener">Ver en GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Demo: reporte de seguridad <span class="accent">real</span></h1>
+      <p class="hero-sub">
+        Este reporte fue <strong>generado por AuditGuard</strong> (ESLint + Semgrep + npm audit)
+        escaneando <code>sample/</code>, un proyecto <strong>intencionalmente vulnerable</strong>.
+        Nada fue escrito a mano: cada hallazgo salió del escaneo real.
+      </p>
+      <div class="hero-links">
+        <a href="./report.md" target="_blank" rel="noopener" class="btn btn-primary">Ver reporte crudo (markdown)</a>
+        <a href="./sample/src/app.js" target="_blank" rel="noopener" class="btn btn-ghost">Ver código del sample</a>
+        <a href="https://github.com/rodricastanio/auditguard-demo" target="_blank" rel="noopener" class="btn btn-ghost">Repo de la demo</a>
+      </div>
+      <div id="meta-bar" class="meta-bar" hidden></div>
+      <div id="warnings" hidden></div>
+    </section>
+
+    <section class="summary-section">
+      <h2 class="section-title">Resumen</h2>
+      <div id="summary-cards" class="summary-cards"></div>
+    </section>
+
+    <section class="engines-section">
+      <h2 class="section-title">Motores de escaneo</h2>
+      <div id="engines" class="engines"></div>
+    </section>
+
+    <section id="npm-section" hidden>
+      <h2 class="section-title">npm audit</h2>
+      <div class="table-wrap">
+        <table id="npm-table" class="data-table"></table>
+      </div>
+    </section>
+
+    <section id="findings-section">
+      <h2 class="section-title">Hallazgos</h2>
+      <div id="findings"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>
+        Ejemplo generado con AuditGuard sobre código intencionalmente vulnerable.
+        No usar como referencia segura. Escaneá tu propio repo con
+        <a href="https://github.com/rodricastanio/AuditGuard" target="_blank" rel="noopener">rodricastanio/AuditGuard</a>.
+      </p>
+      <p class="footer-meta">
+        Reporte: <code>report.md</code> · Workflow: <code>.github/workflows/auditguard.yml</code>
+      </p>
+    </div>
+  </footer>
+
+  <script src="./renderer.js" type="module"></script>
+</body>
+</html>

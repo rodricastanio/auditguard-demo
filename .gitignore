@@ -1,0 +1,9 @@
+# Dependencias locales
+node_modules/
+*.log
+
+# Vercel
+.vercel/
+
+# Auxiliares de validación local
+sample/audit-check.json
