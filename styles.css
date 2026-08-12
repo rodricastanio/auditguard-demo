@@ -96,7 +96,6 @@ code {
   height: 36px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid var(--border);
 }
 .brand-logo img {
   display: block;
