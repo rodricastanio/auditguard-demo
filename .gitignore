@@ -7,3 +7,5 @@ node_modules/
 
 # Auxiliares de validación local
 sample/audit-check.json
+
+.vercel
