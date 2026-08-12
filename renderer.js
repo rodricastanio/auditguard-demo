@@ -68,6 +68,7 @@ function splitFileLine(cell) {
 // ---------- parser ----------
 
 function parseReport(md) {
+  md = String(md || '').replace(/\r\n?/g, '\n');
   const lines = md.split('\n');
   const report = {
     warnings: [],
@@ -277,7 +278,7 @@ function findingCard(f, evidence) {
   }
 
   return `
-    <article class="finding" id="f-${reportIndex}">
+    <article class="finding">
       <div class="finding-top">
         ${pill(sev)}
         <div class="finding-title">
@@ -303,8 +304,6 @@ function shortRule(rule) {
   const parts = cleaned.split('.');
   return parts[parts.length - 1];
 }
-
-let reportIndex = 0;
 
 function groupSection(title, findings, evidenceMap, opts = {}) {
   const body = findings.map((f) => findingCard(f, evidenceMap.get(f))).join('');
@@ -344,8 +343,8 @@ function renderWarnings(warnings) {
   const caution = warnings.filter((w) => w.type === 'caution');
   const warning = warnings.filter((w) => w.type === 'warning');
   const html = [
-    ...caution.map((w) => `<div class="warn warn-caution">⚠️ ${escapeHtml(w.lines.join(' '))}</div>`),
-    ...warning.map((w) => `<div class="warn warn-warning">⚠️ ${escapeHtml(w.lines.join(' '))}</div>`),
+    ...caution.map((w) => `<div class="warn warn-caution">⚠️ ${escapeHtml(w.lines.join(' ').replace(/\*\*/g, ''))}</div>`),
+    ...warning.map((w) => `<div class="warn warn-warning">⚠️ ${escapeHtml(w.lines.join(' ').replace(/\*\*/g, ''))}</div>`),
   ].join('');
   $('#warnings').innerHTML = html;
   $('#warnings').hidden = false;
